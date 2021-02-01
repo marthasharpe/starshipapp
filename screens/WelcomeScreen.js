@@ -13,7 +13,7 @@ const WelcomeScreen = () => {
   const handleLoginPress = () => {
     Alert.alert(
       'Dummy Button',
-      "You found a dummy button! It doesn't actually do anything. Try the other one!",
+      "This button doesn't do anything. Try the other one!",
     );
   };
 
