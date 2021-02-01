@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -12,6 +12,7 @@ import {FAB, TextInput, Title} from 'react-native-paper';
 const InputEmailScreen = ({route, navigation}) => {
   const {firstName, lastName} = route.params;
   const [email, setEmail] = useState('');
+  const [buttonDisabled, setButtonDisabled] = useState(true);
 
   const handleNext = () => {
     navigation.navigate('Password', {firstName, lastName, email});
@@ -23,6 +24,11 @@ const InputEmailScreen = ({route, navigation}) => {
       {text: 'Looks Good', onPress: handleNext},
     ]);
   };
+
+  useEffect(() => {
+    if (email) setButtonDisabled(false);
+  }, [email]);
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -38,7 +44,11 @@ const InputEmailScreen = ({route, navigation}) => {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <FAB mode="contained" style={styles.FAB} onPress={handleConfirmEmail}>
+          <FAB
+            mode="contained"
+            style={styles.FAB}
+            onPress={handleConfirmEmail}
+            disabled={buttonDisabled}>
             Sign Up
           </FAB>
         </View>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -12,10 +12,16 @@ import {FAB, TextInput, Title} from 'react-native-paper';
 const InputNameScreen = ({navigation}) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [buttonDisabled, setButtonDisabled] = useState(true);
 
   const handleNext = () => {
     navigation.navigate('Email', {firstName, lastName});
   };
+
+  useEffect(() => {
+    if (lastName && firstName) setButtonDisabled(false);
+  }, [lastName, firstName]);
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -36,7 +42,11 @@ const InputNameScreen = ({navigation}) => {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <FAB mode="contained" style={styles.FAB} onPress={handleNext}>
+          <FAB
+            mode="contained"
+            style={styles.FAB}
+            onPress={handleNext}
+            disabled={buttonDisabled}>
             Sign Up
           </FAB>
         </View>
