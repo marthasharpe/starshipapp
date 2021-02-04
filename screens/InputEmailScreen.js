@@ -32,7 +32,10 @@ const InputEmailScreen = ({route, navigation}) => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <KeyboardAvoidingView style={styles.container}>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior="padding"
+        keyboardVerticalOffset={100}>
         <View style={styles.titleContainer}>
           <Title style={styles.title}>Email</Title>
         </View>
